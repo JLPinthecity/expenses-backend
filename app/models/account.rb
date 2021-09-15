@@ -1,11 +1,7 @@
 class Account < ApplicationRecord
+    has_many :transactions
+        validates :name, :balance, presence: true
 
-    namespace :api do 
-        namespace :v1 do
-            has_many :transactions
-            validates :name, :balance, presence: true
-        end
-    end
 end
 
 
