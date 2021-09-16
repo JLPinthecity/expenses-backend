@@ -8,5 +8,5 @@
 
 account = Account.create(name: 'Checking', balance: 1000)
 
-transaction = Transaction.create(account_id: account.id, amount: 10, kind: 'deposit', date: Date.today, description: 'found $10')
-transaction_two = Transaction.create(account_id: account.id, amount: 20, kind: 'random', date: Date.today, description: 'found $20')
+transaction = Transaction.create(account_id: 1, amount: 10, kind: 'deposit', date: Date.today, description: 'found $10')
+transaction_two = Transaction.create(account_id: 1, amount: 20, kind: 'withdraw', date: Date.today, description: 'found $20')
