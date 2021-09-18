@@ -21,9 +21,6 @@ class Api::V1::TransactionsController < ApplicationController
         else
             render json: {error: 'Balance too low.'}
         end
-
-
-            render json: {error: 'Error creating account.'}
     end
 
     def destroy
