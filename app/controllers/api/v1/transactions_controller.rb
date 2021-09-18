@@ -4,21 +4,26 @@ class Api::V1::TransactionsController < ApplicationController
     #we want to find transactions of a specific account
 
     def index
-        
-        render json: @accounts
-    end
-
-    def create
-        @account = Account.create(account_params)
-        if @account.save 
-            render json: @account
-        else
-            render json: {error: 'Error creating account.'}
+        @transactions = @account.transactions
+        render json: @transactions
     end
     
     def show
-        @account = Account.find(params[:id])
-        render json: @account
+        @transaction = @account.transactions.find_by(id: params[:id])
+        render json: @transaction
+    end
+
+    def create
+        @transaction = @account.transactions.new(transaction_params)
+        if @account.update_balance(@transaction) != "Balance too low."
+            @transaction.save 
+            render json: @transaction
+        else
+            render json: {error: 'Balance too low.'}
+        end
+
+
+            render json: {error: 'Error creating account.'}
     end
 
     def destroy
@@ -31,7 +36,7 @@ class Api::V1::TransactionsController < ApplicationController
     def set_account
         @account = Account.find(params[:account_id])
     end
-    #we want to find the account from api/v1/accounts/1 for example
+    #we want to find the account from api/v1/accounts/1/transaction for example
 
     def transaction_params
         params.require(:transaction).permit(:amount, :amount_id, :kind, :date, :description)
