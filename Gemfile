@@ -26,6 +26,8 @@ gem 'rack-cors'
 
 gem 'active_model_serializers'
 
+gem 'pry'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

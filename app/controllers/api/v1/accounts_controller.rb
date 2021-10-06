@@ -1,4 +1,5 @@
 class Api::V1::AccountsController < ApplicationController
+    skip_forgery_protection
 
     def index
         @accounts = Account.all
@@ -6,6 +7,7 @@ class Api::V1::AccountsController < ApplicationController
     end
 
     def create
+        binding.pry
         @account = Account.create(account_params)
         if @account.save 
             render json: @account

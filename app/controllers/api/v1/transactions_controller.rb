@@ -4,7 +4,11 @@ class Api::V1::TransactionsController < ApplicationController
     #we want to find transactions of a specific account
 
     def index
-        @transactions = @account.transactions
+        if @account
+            @transactions = @account.transactions
+        else
+            @transactions = Transaction.all
+        end
         render json: @transactions
     end
     
