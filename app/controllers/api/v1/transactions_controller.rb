@@ -1,4 +1,5 @@
 class Api::V1::TransactionsController < ApplicationController
+    skip_forgery_protection
 
     before_action :set_account
     #we want to find transactions of a specific account
@@ -18,12 +19,10 @@ class Api::V1::TransactionsController < ApplicationController
     end
 
     def create
-        binding.pry
         @transaction = @account.transactions.new(transaction_params)
         if @account.update_balance(@transaction) != "Balance too low."
             @transaction.save 
             render json: @account
-        
         else
             render json: {error: 'Balance too low.'}
         end
