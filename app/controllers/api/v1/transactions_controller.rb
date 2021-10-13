@@ -29,7 +29,10 @@ class Api::V1::TransactionsController < ApplicationController
     end
 
     def destroy
-        binding.pry
+        @transaction = Transaction.find(params["id"])
+        @account = Account.find(@transaction.account_id)
+        @transaction.destroy
+        render json: @account
     end
 
     private 
