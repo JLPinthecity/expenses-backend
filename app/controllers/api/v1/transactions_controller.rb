@@ -29,8 +29,7 @@ class Api::V1::TransactionsController < ApplicationController
     end
 
     def destroy
-        @account = Account.find(params[:id])
-        @account.destroy
+        binding.pry
     end
 
     private 
