@@ -3,14 +3,14 @@ class Account < ApplicationRecord
     validates :name, :balance, presence: true
 
     def update_balance(transaction)
-        binding.pry
         if transaction.kind == 'deposit'
             self.balance = self.balance + transaction.amount
             self.save
-        else transaction.kind == 'withdrawal'
+        elsif transaction.kind == 'withdrawal'
             if self.balance >= transaction.amount
             self.balance = self.balance - transaction.amount
             self.save
+            binding.pry
             else
                 return "Balance too low."
             end
