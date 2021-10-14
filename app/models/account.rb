@@ -10,10 +10,23 @@ class Account < ApplicationRecord
             if self.balance >= transaction.amount
             self.balance = self.balance - transaction.amount
             self.save
-            binding.pry
             else
                 return "Balance too low."
             end
+        end
+    end
+
+    def delete_transaction_from_total(transaction)
+        if transition.kind == 'deposit'
+            if self.balance >= transition.amount
+            self.balance = self.balance - transaction.amount
+            self.save
+            else
+                return "Balance too low" 
+            end
+        elsif transition.kind == 'withdrawal'
+            self.balance = self.balance + transaction.amount
+            self.save
         end
     end
 
